@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Description>Redis Store for operational data and for Caching of Identity Server 4</Description>
+    <Description>Redis Store for operational data and for Caching of Duende Identity Server</Description>
     <Authors>Ali Bazzi and Stephen Adams</Authors>
-    <Company>Ali Bazzi</Company>
+    <Company>Ali Bazzi and Stephen Adams</Company>
     <AssemblyVersion>5.2.4.0</AssemblyVersion>
-    <PackageReleaseNotes>Supports Identity Server 4 v4.</PackageReleaseNotes>
+    <PackageReleaseNotes>Supports Duende Identity Server v5.2.4</PackageReleaseNotes>
     <Version>5.2.4</Version>
     <PackageProjectUrl>https://github.com/brnn8r/Duende.IdentityServer.Contrib.RedisStore</PackageProjectUrl>
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
@@ -37,7 +37,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="IdentityServer4.Contrib.RedisStore.nuspec" />
+    <None Remove="Duende.IdentityServer.Contrib.RedisStore.nuspec" />
   </ItemGroup>
 
   <ItemGroup>
