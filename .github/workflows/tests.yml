@@ -26,3 +26,9 @@ jobs:
         run: dotnet test --no-restore
       - name: Pack nugets
         run: dotnet pack -c Release --no-build --output .
+      - uses: actions/upload-artifact@v3
+        with:
+          name: nuget-package
+          path: |
+            *.nupkg
+            *.snupkg
