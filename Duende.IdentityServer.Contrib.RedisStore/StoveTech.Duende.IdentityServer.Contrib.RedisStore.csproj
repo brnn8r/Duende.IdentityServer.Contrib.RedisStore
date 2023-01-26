@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Redis Store for operational data and for Caching of Duende Identity Server</Description>
     <Authors>Ali Bazzi and Stephen Adams</Authors>
-    <Company>Ali Bazzi and Stephen Adams</Company>
+    <Company>Ali Bazzi and StoveTech</Company>
     <AssemblyVersion>5.2.4.0</AssemblyVersion>
     <PackageReleaseNotes>Supports Duende Identity Server v5.2.4</PackageReleaseNotes>
     <Version>5.2.4</Version>
@@ -14,7 +14,7 @@
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageTags>Redis Store IdentityServer4</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Ali Bazzi</Copyright>
+    <Copyright>Ali Bazzi and StoveTech</Copyright>
     <FileVersion>5.2.4.0</FileVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
