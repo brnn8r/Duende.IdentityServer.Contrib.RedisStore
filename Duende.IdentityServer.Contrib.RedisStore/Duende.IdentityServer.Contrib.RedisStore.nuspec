@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Ali Bazzi and Stephen Adams</authors>
+    <owners>Ali Bazzi and Stephen Adams</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Add support to use already established connection through ConnectionMultiplexer</releaseNotes>
+    <copyright>Copyright 2022</copyright>
+    <tags>IdentityServer Duende.IdentityServer Redis Store</tags>
+  </metadata>
+</package>
