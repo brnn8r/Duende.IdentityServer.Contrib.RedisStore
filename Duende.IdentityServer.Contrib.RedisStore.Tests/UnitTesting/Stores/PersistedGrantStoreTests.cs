@@ -265,7 +265,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Stores
                     Type = "type1",
                 }
             ).ToList();
-            Task.WaitAll(expected.Select(x => _store.StoreAsync(x)).ToArray());
+            await Task.WhenAll(expected.Select(x => _store.StoreAsync(x)).ToArray());
 
             var actual = (await _store.GetAllAsync(new Duende.IdentityServer.Stores.PersistedGrantFilter { SubjectId = subjectId, Type = "type1" })).ToList();
 
