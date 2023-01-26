@@ -1,14 +1,14 @@
-![Automated tests](https://github.com/AliBazzi/IdentityServer4.Contrib.RedisStore/workflows/Automated%20tests/badge.svg)
+![Automated tests](https://github.com/brnn8r/Duende.IdentityServer.Contrib.RedisStore/workflows/Automated%20tests/badge.svg)
 
-# IdentityServer4.Contrib.RedisStore
+# Duende.IdentityServer.Contrib.RedisStore
 
-IdentityServer4.Contrib.RedisStore is a persistence layer using [Redis](https://redis.io) DB for operational data and for caching capability for Identity Server 4. Specifically, this store provides implementation for [IPersistedGrantStore](http://docs.identityserver.io/en/release/topics/deployment.html#operational-data) and [ICache<T>](http://docs.identityserver.io/en/release/topics/startup.html#caching).
+Duende.IdentityServer.Contrib.RedisStore is a persistence layer using [Redis](https://redis.io) DB for operational data and for caching capability for Duende Identity Server. Specifically, this store provides implementation for [IPersistedGrantStore](http://docs.identityserver.io/en/release/topics/deployment.html#operational-data) and [ICache<T>](http://docs.identityserver.io/en/release/topics/startup.html#caching).
 
 ## How to use
 
-You need to install the [nuget package](https://www.nuget.org/packages/IdentityServer4.Contrib.RedisStore)
+You need to install the nuget package
 
-then you can inject the operational store in the Identity Server 4 Configuration at startup using one of the overloads of `AddOperationalStore`:
+then you can inject the operational store in the Duende Identity Server Configuration at startup using one of the overloads of `AddOperationalStore`:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -102,16 +102,16 @@ public void ConfigureServices(IServiceCollection services)
         options.ConfigurationOptions = cacheOptions;
     })
     ...
-    .AddClientStoreCache<IdentityServer4.EntityFramework.Stores.ClientStore>()
-    .AddResourceStoreCache<IdentityServer4.EntityFramework.Stores.ResourceStore>()
-    .AddCorsPolicyCache<IdentityServer4.EntityFramework.Services.CorsPolicyService>()
+    .AddClientStoreCache<Duende.IdentityServer.EntityFramework.Stores.ClientStore>()
+    .AddResourceStoreCache<Duende.IdentityServer.EntityFramework.Stores.ResourceStore>()
+    .AddCorsPolicyCache<Duende.IdentityServer.EntityFramework.Services.CorsPolicyService>()
     .AddProfileServiceCache<MyProfileService>()
     ...
 }
 
 ```
 
-In this previous snippet, registration of caching capability are added for Client Store, Resource Store and Cors Policy Service, and it's registered for [Entity Framework stores](https://github.com/IdentityServer/IdentityServer4/tree/main/src/EntityFramework.Storage) in this case, but if you have your own Stores you should register them here in order to allow the caching for these specific stores.
+In this previous snippet, registration of caching capability are added for Client Store, Resource Store and Cors Policy Service, and it's registered for [Entity Framework stores](https://github.com/IdentityServer/Duende.IdentityServer/tree/main/src/EntityFramework.Storage) in this case, but if you have your own Stores you should register them here in order to allow the caching for these specific stores.
 
 > Note: operational store and caching are not related, you can use them separately or combined.
 
@@ -119,7 +119,7 @@ In this previous snippet, registration of caching capability are added for Clien
 
 ## the solution approach
 
-the solution was approached based on how the [SQL Store](https://github.com/IdentityServer/IdentityServer4/tree/main/src/EntityFramework.Storage) storing the operational data, but the concept of Redis as a NoSQL db is totally different than relational db concepts, all the operational data stores implement the following [IPersistedGrantStore](https://github.com/IdentityServer/IdentityServer4/blob/main/src/Storage/src/Stores/IPersistedGrantStore.cs) interface:
+the solution was approached based on how the [SQL Store](https://github.com/IdentityServer/Duende.IdentityServer/tree/main/src/EntityFramework.Storage) storing the operational data, but the concept of Redis as a NoSQL db is totally different than relational db concepts, all the operational data stores implement the following [IPersistedGrantStore](https://github.com/IdentityServer/Duende.IdentityServer/blob/main/src/Storage/src/Stores/IPersistedGrantStore.cs) interface:
 
 ```csharp
 public interface IPersistedGrantStore
