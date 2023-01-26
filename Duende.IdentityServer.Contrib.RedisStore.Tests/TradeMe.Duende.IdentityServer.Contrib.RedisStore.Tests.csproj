@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Duende.IdentityServer.Contrib.RedisStore\Duende.IdentityServer.Contrib.RedisStore.csproj" />
+    <ProjectReference Include="..\Duende.IdentityServer.Contrib.RedisStore\TradeMe.Duende.IdentityServer.Contrib.RedisStore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
