@@ -1,9 +1,5 @@
 ![Automated tests](https://github.com/brnn8r/Duende.IdentityServer.Contrib.RedisStore/workflows/Automated%20tests/badge.svg)
 
-# Disclaimer
-
-The software provided is offered on an "as is" and "as available" basis. By using the software, you understand and agree that you use it at your own risk. I make no representations or warranties of any kind, express or implied, as to the operation of the software or the information, content, materials or products included on the software. I will not be liable for any damages of any kind arising from the use of the software, including but not limited to direct, indirect, incidental, punitive, and consequential damages.
-
 # Duende.IdentityServer.Contrib.RedisStore
 
 Duende.IdentityServer.Contrib.RedisStore is a persistence layer using [Redis](https://redis.io) DB for operational data and for caching capability for Duende Identity Server. Specifically, this store provides implementation for [IPersistedGrantStore](http://docs.identityserver.io/en/release/topics/deployment.html#operational-data) and [ICache<T>](http://docs.identityserver.io/en/release/topics/startup.html#caching).
