@@ -6,16 +6,16 @@
     <Description>Redis Store for operational data and for Caching of Duende Identity Server</Description>
     <Authors>Ali Bazzi and Stephen Adams</Authors>
     <Company>Ali Bazzi and StoveTech</Company>
-    <AssemblyVersion>5.2.4.0</AssemblyVersion>
+    <AssemblyVersion>5.2.4.1</AssemblyVersion>
     <PackageReleaseNotes>Supports Duende Identity Server v5.2.4</PackageReleaseNotes>
-    <Version>5.2.4</Version>
+    <Version>5.2.4.1</Version>
     <PackageProjectUrl>https://github.com/brnn8r/Duende.IdentityServer.Contrib.RedisStore</PackageProjectUrl>
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageTags>Redis Store IdentityServer4</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Ali Bazzi and StoveTech</Copyright>
-    <FileVersion>5.2.4.0</FileVersion>
+    <FileVersion>5.2.4.1</FileVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
