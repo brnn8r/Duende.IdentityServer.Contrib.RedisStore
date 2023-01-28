@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
@@ -19,16 +18,21 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             this.logger = logger;
         }
 
-        public Task<T> GetAsync(string key)
+        public async Task<T> GetAsync(string key)
         {
-            var result = cache.Get(key);
 
-            if (result == null)
-                logger.LogDebug($"Cache miss for {key}");
-            else
-                logger.LogDebug($"Cache hit for {key}");
+            return await GetOrDefaultAsync(key);           
+        }
 
-            return Task.FromResult((T)result);
+        public async Task<T> GetOrAddAsync(string key, TimeSpan expiration, Func<Task<T>> get)
+        {
+            return await GetOrDefaultAsync(key, expiration, get);            
+        }
+
+        public Task RemoveAsync(string key)
+        {
+            cache.Remove(key);
+            return Task.CompletedTask;
         }
 
         public Task SetAsync(string key, T item, TimeSpan expiration)
@@ -36,5 +40,30 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             cache.Set(key, item, expiration);
             return Task.CompletedTask;
         }
+
+        private async Task<T> GetOrDefaultAsync(string key, TimeSpan? expiration = null, Func<Task<T>> get = null)
+        {
+            var result = cache.Get(key);
+
+            if (result == null)
+            {
+                logger.LogDebug($"Cache miss for {key}");
+
+                if (get == null)
+                {
+                    return default;
+                }
+
+                var item = await get();
+                await SetAsync(key, item, expiration ?? TimeSpan.FromMinutes(10));
+                return item;
+            }
+            else
+            {
+                logger.LogDebug($"Cache hit for {key}");
+                return (T)result;
+            }
+        }
+
     }
 }

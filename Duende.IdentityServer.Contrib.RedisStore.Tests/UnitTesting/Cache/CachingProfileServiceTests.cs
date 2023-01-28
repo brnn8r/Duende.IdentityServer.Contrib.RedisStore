@@ -28,7 +28,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             memoryCache = new MemoryCache(new MemoryCacheOptions());
             logger = new FakeLogger<FakeCache<IsActiveContextCacheEntry>>();
             cache = new FakeCache<IsActiveContextCacheEntry>(memoryCache, logger);
-            profileServiceCache = new CachingProfileService<FakeProfileService>(inner, cache, new ProfileServiceCachingOptions<FakeProfileService>(), Mock.Of<ILogger<CachingProfileService<FakeProfileService>>>());
+            profileServiceCache = new CachingProfileService<FakeProfileService>(inner, cache, new ProfileServiceCachingOptions<FakeProfileService>());
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
         [Fact]
         public async Task AssertExpiryOfCacheEntry()
         {
-            var profileServiceCache = new CachingProfileService<FakeProfileService>(inner, cache, new ProfileServiceCachingOptions<FakeProfileService>() { Expiration = TimeSpan.FromSeconds(1) }, Mock.Of<ILogger<CachingProfileService<FakeProfileService>>>());
+            var profileServiceCache = new CachingProfileService<FakeProfileService>(inner, cache, new ProfileServiceCachingOptions<FakeProfileService>() { Expiration = TimeSpan.FromSeconds(1) });
             var principal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim> { new Claim("sub", "1") }));
             var context = new IsActiveContext(principal, new Client(), "test");
             await profileServiceCache.IsActiveAsync(context);
