@@ -42,7 +42,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
         {
             string key = nameof(SetAsync_Stores_Entries);
             string expected = "test_value";
-            await _cache.SetAsync(key, expected, TimeSpan.FromSeconds(1));
+            await _cache.SetAsync(key, expected, TimeSpan.FromMinutes(1));
 
             var actual = await _cache.GetAsync(key);
 
