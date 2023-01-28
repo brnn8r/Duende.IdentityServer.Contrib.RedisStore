@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Duende.IdentityServer.Contrib.RedisStore;
 using Duende.IdentityServer.Models;
-using Microsoft.Extensions.Logging;
-using Duende.IdentityServer.Extensions;
 
 namespace Duende.IdentityServer.Services
 {
@@ -19,12 +17,9 @@ namespace Duende.IdentityServer.Services
 
         private readonly ProfileServiceCachingOptions<TProfileService> options;
 
-        private readonly ILogger<CachingProfileService<TProfileService>> logger;
-
-        public CachingProfileService(TProfileService inner, ICache<IsActiveContextCacheEntry> cache, ProfileServiceCachingOptions<TProfileService> options, ILogger<CachingProfileService<TProfileService>> logger)
+        public CachingProfileService(TProfileService inner, ICache<IsActiveContextCacheEntry> cache, ProfileServiceCachingOptions<TProfileService> options)
         {
             this.inner = inner;
-            this.logger = logger;
             this.cache = cache;
             this.options = options;
         }
@@ -51,13 +46,12 @@ namespace Duende.IdentityServer.Services
 
             if (options.ShouldCache(context))
             {
-                var entry = await cache.GetAsync(key, options.Expiration,
+                var entry = await cache.GetOrAddAsync(key, options.Expiration,
                               async () =>
                               {
                                   await inner.IsActiveAsync(context);
                                   return new IsActiveContextCacheEntry { IsActive = context.IsActive };
-                              },
-                              logger);
+                              });
 
                 context.IsActive = entry.IsActive;
             }
