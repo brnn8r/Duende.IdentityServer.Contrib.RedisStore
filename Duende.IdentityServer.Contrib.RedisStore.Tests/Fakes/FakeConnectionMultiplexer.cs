@@ -1,4 +1,5 @@
 ﻿using StackExchange.Redis;
+using StackExchange.Redis.Maintenance;
 using StackExchange.Redis.Profiling;
 using System;
 using System.IO;
@@ -33,12 +34,16 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Fakes
         public event EventHandler<EndPointEventArgs> ConfigurationChanged;
         public event EventHandler<EndPointEventArgs> ConfigurationChangedBroadcast;
         public event EventHandler<HashSlotMovedEventArgs> HashSlotMoved;
+        public event EventHandler<ServerMaintenanceEvent> ServerMaintenanceEvent;
 
         public void Close(bool allowCommandsToComplete = true) { }
         public Task CloseAsync(bool allowCommandsToComplete = true) => Task.CompletedTask;
         public bool Configure(TextWriter log = null) => true;
         public Task<bool> ConfigureAsync(TextWriter log = null) => Task.FromResult(true);
         public void Dispose() { }
+
+        public ValueTask DisposeAsync() => default;
+
         public void ExportConfiguration(Stream destination, ExportOptions options = (ExportOptions)(-1)) { }
         public ServerCounters GetCounters() => new ServerCounters(null);
         public IDatabase GetDatabase(int db = -1, object asyncState = null) => null;
@@ -48,6 +53,9 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Fakes
         public IServer GetServer(string hostAndPort, object asyncState = null) => null;
         public IServer GetServer(IPAddress host, int port) => null;
         public IServer GetServer(EndPoint endpoint, object asyncState = null) => null;
+
+        public IServer[] GetServers() => default;
+
         public string GetStatus() => string.Empty;
         public void GetStatus(TextWriter log) { }
         public string GetStormLog() => string.Empty;
