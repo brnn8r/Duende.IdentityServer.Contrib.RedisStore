@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Redis Store for operational data and for Caching of Duende Identity Server</Description>
     <Authors>Ali Bazzi and Stephen Adams</Authors>
     <Company>Ali Bazzi and StoveTech</Company>
-    <AssemblyVersion>6.1.7.0</AssemblyVersion>
+    <AssemblyVersion>6.2.2.0</AssemblyVersion>
     <PackageReleaseNotes>Supports Duende Identity Server v6.0.4</PackageReleaseNotes>
-    <Version>6.1.7.0</Version>
+    <Version>6.2.2.0</Version>
     <PackageProjectUrl>https://github.com/brnn8r/Duende.IdentityServer.Contrib.RedisStore</PackageProjectUrl>
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageTags>Redis Store IdentityServer4</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Ali Bazzi and StoveTech</Copyright>
-    <FileVersion>6.1.7.0</FileVersion>
+    <FileVersion>6.2.2.0</FileVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="6.1.7" />
-    <PackageReference Include="Duende.IdentityServer.Storage" Version="6.1.7" />
+    <PackageReference Include="Duende.IdentityServer" Version="6.2.2" />
+    <PackageReference Include="Duende.IdentityServer.Storage" Version="6.2.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
