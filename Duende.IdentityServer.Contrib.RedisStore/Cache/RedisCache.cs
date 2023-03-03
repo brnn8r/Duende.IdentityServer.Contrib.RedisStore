@@ -1,6 +1,5 @@
 ﻿using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores.Serialization;
-using IdentityModel.Internal;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System;
@@ -35,29 +34,6 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Cache
 
         public async Task<T> GetAsync(string key)
         {
-            return await GetOrDefaultAsync(key);           
-        }
-        public async Task SetAsync(string key, T item, TimeSpan expiration)
-        {
-            var cacheKey = GetKey(key);
-            await this.database.StringSetAsync(cacheKey, Serialize(item), expiration);
-            logger.LogDebug("persisted {type} with Key: {key} in Redis Cache successfully.", typeof(T).FullName, key);
-        }
-
-
-        public async Task<T> GetOrAddAsync(string key, TimeSpan duration, Func<Task<T>> get)
-        {
-            return await GetOrDefaultAsync(key, duration, get);          
-        }
-
-        public async Task RemoveAsync(string key)
-        {
-            var cacheKey = GetKey(key);
-            await this.database.KeyDeleteAsync(cacheKey);
-        }
-
-        private async Task<T> GetOrDefaultAsync(string key, TimeSpan? expiration = null, Func<Task<T>> get = null)
-        {
             var cacheKey = GetKey(key);
             var item = await this.database.StringGetAsync(cacheKey);
             if (item.HasValue)
@@ -68,27 +44,43 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Cache
             else
             {
                 logger.LogDebug("missed {type} with Key: {key} from Redis Cache.", typeof(T).FullName, key);
-
-                if(get == null)
-                {
-                    return default;
-                }
-
-                T newItem = await get();
-
-                if (newItem != null)
-                {
-                    await SetAsync(key, newItem, expiration ?? TimeSpan.FromMinutes(10));
-                    return newItem;
-                }
-                else
-                {
-                    return default;
-                }
-              
+                return default;
             }
         }
 
+        public async Task SetAsync(string key, T item, TimeSpan expiration)
+        {
+            var cacheKey = GetKey(key);
+            await this.database.StringSetAsync(cacheKey, Serialize(item), expiration);
+            logger.LogDebug("persisted {type} with Key: {key} in Redis Cache successfully.", typeof(T).FullName, key);
+        }
+
+
+        public async Task<T> GetOrAddAsync(string key, TimeSpan duration, Func<Task<T>> get)
+        {
+            var item = await GetAsync(key);
+
+            if(item != default)
+            {
+                return item;
+            }
+
+            logger.LogDebug("missed {type} with Key: {key} from Redis Cache.", typeof(T).FullName, key);
+
+            if (get == null || (item = await get()) == default)
+            {
+                return default;
+            }
+            
+            await SetAsync(key, item, duration);
+            return item;            
+        }
+
+        public async Task RemoveAsync(string key)
+        {
+            var cacheKey = GetKey(key);
+            await this.database.KeyDeleteAsync(cacheKey);
+        }
 
         #region Json
         private JsonSerializerOptions SerializerSettings
