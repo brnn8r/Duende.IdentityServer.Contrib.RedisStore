@@ -1,6 +1,5 @@
 ﻿using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores.Serialization;
-using IdentityModel.Internal;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System;
@@ -35,8 +34,20 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Cache
 
         public async Task<T> GetAsync(string key)
         {
-            return await GetOrDefaultAsync(key);           
+            var cacheKey = GetKey(key);
+            var item = await this.database.StringGetAsync(cacheKey);
+            if (item.HasValue)
+            {
+                logger.LogDebug("retrieved {type} with Key: {key} from Redis Cache successfully.", typeof(T).FullName, key);
+                return Deserialize(item);
+            }
+            else
+            {
+                logger.LogDebug("missed {type} with Key: {key} from Redis Cache.", typeof(T).FullName, key);
+                return default;
+            }
         }
+
         public async Task SetAsync(string key, T item, TimeSpan expiration)
         {
             var cacheKey = GetKey(key);
@@ -47,7 +58,22 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Cache
 
         public async Task<T> GetOrAddAsync(string key, TimeSpan duration, Func<Task<T>> get)
         {
-            return await GetOrDefaultAsync(key, duration, get);          
+            var item = await GetAsync(key);
+
+            if(item != default)
+            {
+                return item;
+            }
+
+            logger.LogDebug("cache miss for type: {type} with key: {key} from Redis Cache.", typeof(T).FullName, key);
+
+            if(get == null || (item = await get()) == default)
+            {
+                return default;
+            }
+
+            await SetAsync(key, item, duration);
+            return item;
         }
 
         public async Task RemoveAsync(string key)
