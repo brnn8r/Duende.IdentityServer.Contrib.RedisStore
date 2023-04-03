@@ -33,7 +33,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
         public async Task<T> GetOrAddAsync(string key, TimeSpan expiration, Func<Task<T>> get)
         {
             var result = await GetAsync(key);
-
+            
             if(result != default)
             {
                 return result;
@@ -45,9 +45,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             }
 
             await SetAsync(key, result, expiration);
-
             return result;
-
         }
 
         public Task RemoveAsync(string key)
@@ -60,7 +58,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
         {
             cache.Set(key, item, expiration);
             return Task.CompletedTask;
-        }
+        }      
 
     }
 }
