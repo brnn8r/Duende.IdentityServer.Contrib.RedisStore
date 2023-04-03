@@ -18,15 +18,34 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             this.logger = logger;
         }
 
-        public async Task<T> GetAsync(string key)
+        public Task<T> GetAsync(string key)
         {
+            var result = cache.Get(key);
 
-            return await GetOrDefaultAsync(key);           
+            if (result == null)
+                logger.LogDebug($"Cache miss for {key}");
+            else
+                logger.LogDebug($"Cache hit for {key}");
+
+            return Task.FromResult((T)result);
         }
 
         public async Task<T> GetOrAddAsync(string key, TimeSpan expiration, Func<Task<T>> get)
         {
-            return await GetOrDefaultAsync(key, expiration, get);            
+            var result = await GetAsync(key);
+            
+            if(result != default)
+            {
+                return result;
+            }
+
+            if(get == null || (result = await get()) == default)
+            {
+                return default;
+            }
+
+            await SetAsync(key, result, expiration);
+            return result;
         }
 
         public Task RemoveAsync(string key)
