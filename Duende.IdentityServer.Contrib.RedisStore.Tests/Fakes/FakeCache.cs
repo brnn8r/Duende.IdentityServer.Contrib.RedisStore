@@ -36,7 +36,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             
             if(result != default)
             {
-                return default;
+                return result;
             }
 
             if(get == null || (result = await get()) == default)
