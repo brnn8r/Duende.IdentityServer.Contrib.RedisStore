@@ -65,15 +65,15 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Cache
                 return item;
             }
 
-            logger.LogDebug("missed {type} with Key: {key} from Redis Cache.", typeof(T).FullName, key);
+            logger.LogDebug("cache miss for type: {type} with key: {key} from Redis Cache.", typeof(T).FullName, key);
 
-            if (get == null || (item = await get()) == default)
+            if(get == null || (item = await get()) == default)
             {
                 return default;
             }
-            
+
             await SetAsync(key, item, duration);
-            return item;            
+            return item;
         }
 
         public async Task RemoveAsync(string key)
@@ -81,7 +81,6 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Cache
             var cacheKey = GetKey(key);
             await this.database.KeyDeleteAsync(cacheKey);
         }
-
         #region Json
         private JsonSerializerOptions SerializerSettings
         {
