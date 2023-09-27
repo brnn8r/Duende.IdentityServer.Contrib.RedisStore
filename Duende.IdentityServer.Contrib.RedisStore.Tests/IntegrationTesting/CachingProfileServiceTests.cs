@@ -107,7 +107,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests
                 });
                 result.IsActive.Should().BeTrue();
             }
-            logger.AccessCount["Cache hit for 1"].Should().Equals(10);
+            logger.AccessCount["Cache hit for 1"].Should().Be(10);
         }
 
         [Fact]
