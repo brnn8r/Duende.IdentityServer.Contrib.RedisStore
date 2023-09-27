@@ -40,7 +40,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             await profileServiceCache.IsActiveAsync(context);
             await profileServiceCache.IsActiveAsync(context);
             context.IsActive.Should().BeTrue();
-            logger.AccessCount["Cache hit for 1"].Should().Equals(2);
+            logger.AccessCount["Cache hit for 1"].Should().Be(2);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
             await profileServiceCache.IsActiveAsync(context);
             await profileServiceCache.IsActiveAsync(context);
             context.IsActive.Should().BeTrue();
-            logger.AccessCount["Cache hit for 1"].Should().Equals(2);
+            logger.AccessCount["Cache hit for 1"].Should().Be(2);
         }
     }
 }
