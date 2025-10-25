@@ -10,6 +10,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Fakes
 {
     internal class FakeConnectionMultiplexer : IConnectionMultiplexer
     {
+
         public string ClientName { get; set; }
 
         public string Configuration { get; set; }
@@ -68,5 +69,6 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Fakes
         public void Wait(Task task) { }
         public T Wait<T>(Task<T> task) => default(T);
         public void WaitAll(params Task[] tasks) { }
+        public void AddLibraryNameSuffix(string suffix) { }
     }
 }
