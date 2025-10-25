@@ -88,3 +88,9 @@ builder.AddIdentityServer()
 ```
 
 For more detailed instructions, refer to the project's README and the official Duende IdentityServer documentation.
+
+## Publishing
+
+This package is published to NuGet. Different versions are maintained to correspond with different versions of Duende IdentityServer.
+
+The package can be found at: [https://www.nuget.org/packages/StoveTech.Duende.IdentityServer.Contrib.RedisStore](https://www.nuget.org/packages/StoveTech.Duende.IdentityServer.Contrib.RedisStore)
