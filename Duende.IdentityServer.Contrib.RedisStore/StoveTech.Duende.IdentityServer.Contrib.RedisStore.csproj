@@ -14,6 +14,7 @@
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageTags>Redis Store Duende.IdentityServer.7.0.8</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>../README.md</PackageReadmeFile>
     <Copyright>Ali Bazzi and StoveTech</Copyright>
     <FileVersion>7.0.8.0</FileVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -22,8 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="7.0.8" />
-    <PackageReference Include="Duende.IdentityServer.Storage" Version="7.0.8" />
+    <PackageReference Include="Duende.IdentityServer" Version="7.1.1" />
+    <PackageReference Include="Duende.IdentityServer.Storage" Version="7.1.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 

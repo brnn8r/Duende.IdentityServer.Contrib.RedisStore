@@ -351,7 +351,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Stores
         {
             var now = DateTime.Now;
             _clock.Setup(x => x.GetUtcNow()).Returns(now);
-            string subjectId = $"{nameof(GetAllAsync_Does_Not_Retrieve_Expired_Grants)}-subjectId";
+            string subjectId = $"{nameof(GetAllAsync_Does_Not_Retrieve_Expired_Grants)}-subjectIdz";
             var expected = Enumerable.Range(0, 5).Select(x =>
                 new PersistedGrant
                 {
