@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Redis Store for operational data and for Caching of Duende Identity Server</Description>
     <Authors>Ali Bazzi and Stephen Adams</Authors>
     <Company>Ali Bazzi and StoveTech</Company>
-    <AssemblyVersion>6.3.5.1</AssemblyVersion>
-    <PackageReleaseNotes>Supports Duende Identity Server v6.3.5</PackageReleaseNotes>
-    <Version>6.3.5.1</Version>
+    <AssemblyVersion>7.0.8.0</AssemblyVersion>
+    <PackageReleaseNotes>Supports Duende Identity Server v7.0.8</PackageReleaseNotes>
+    <Version>7.0.8.0</Version>
     <PackageProjectUrl>https://github.com/brnn8r/Duende.IdentityServer.Contrib.RedisStore</PackageProjectUrl>
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
     <PackageIcon>icon.jpg</PackageIcon>
-    <PackageTags>Redis Store Duende.IdentityServer.6.3.5</PackageTags>
+    <PackageTags>Redis Store Duende.IdentityServer.7.0.8</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Ali Bazzi and StoveTech</Copyright>
-    <FileVersion>6.3.5.1</FileVersion>
+    <FileVersion>7.0.8.0</FileVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="6.3.5" />
-    <PackageReference Include="Duende.IdentityServer.Storage" Version="6.3.5" />
+    <PackageReference Include="Duende.IdentityServer" Version="7.0.8" />
+    <PackageReference Include="Duende.IdentityServer.Storage" Version="7.0.8" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.58" />
   </ItemGroup>
 
   <ItemGroup>
