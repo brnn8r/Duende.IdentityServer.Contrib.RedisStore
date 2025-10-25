@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project is a .NET library that provides a Redis-based persistence layer for Duende IdentityServer. It serves as a store for operational data (`IPersistedGrantStore`) and a caching layer (`ICache<T>`), leveraging Redis for distributed storage and caching. The solution is structured into a main library project (`Duende.IdentityServer.Contrib.RedisStore`) and a corresponding test project (`Duende.IdentityServer.Contrib.RedisStore.Tests`). It targets .NET 6.0 and .NET 7.0.
+This project is a .NET library that provides a Redis-based persistence layer for Duende IdentityServer. It serves as a store for operational data (`IPersistedGrantStore`) and a caching layer (`ICache<T>`), leveraging Redis for distributed storage and caching. The solution is structured into a main library project (`Duende.IdentityServer.Contrib.RedisStore`) and a corresponding test project (`Duende.IdentityServer.Contrib.RedisStore.Tests`). It targets .NET 8.0.
 
 The core logic revolves around storing and retrieving IdentityServer's persisted grants in Redis. To overcome Redis's non-relational nature, it cleverly stores multiple key entries for the same grant, enabling efficient lookups by subject ID, client ID, session ID, and type. It also utilizes Redis's key expiration features to manage the lifecycle of grants automatically.
 
@@ -42,7 +42,7 @@ The `makefile` provides convenience targets for managing the test environment:
 *   `make up`: Starts the Redis container in the background.
 *   `make down`: Stops the Redis container.
 
-The CI pipeline, defined in `.github/workflows/tests.yml`, automates the build and test process on every pull request, running tests against .NET 6.0 and 7.0.
+The CI pipeline, defined in `.github/workflows/tests.yml`, automates the build and test process on every pull request, running tests against .NET 8.0.
 
 ## Development Conventions
 
@@ -50,7 +50,7 @@ The CI pipeline, defined in `.github/workflows/tests.yml`, automates the build a
 *   **Configuration:** Service registration and configuration are handled via extension methods on `IIdentityServerBuilder` (e.g., `AddOperationalStore`, `AddRedisCaching`), which is a standard pattern in the IdentityServer ecosystem.
 *   **Testing:** The `PersistedGrantStoreTests.cs` file demonstrates a clear testing strategy.
     *   Tests are written using the Arrange-Act-Assert pattern.
-    *   `Moq` is used to mock dependencies like `ILogger` and `ISystemClock`.
+    *   `Moq` is used to mock dependencies like `ILogger` and `TimeProvider`.
     *   `FluentAssertions` is used for more readable and expressive assertions (e.g., `actual.Should().BeEquivalentTo(expected)`).
     *   Tests cover various scenarios, including storing, retrieving, removing grants, and handling expirations.
 *   **Coding Style:** The C# code follows standard Microsoft conventions. It uses modern C# features like top-level statements, file-scoped namespaces, and asynchronous programming (`async`/`await`). Dependency injection is used throughout the library.
@@ -60,6 +60,7 @@ The CI pipeline, defined in `.github/workflows/tests.yml`, automates the build a
 This repository uses long-running branches to align with specific versions of the underlying Duende IdentityServer dependency. The naming convention for these branches is `releases/x.y.x`, where `x.y` corresponds to a major/minor version of Duende IdentityServer.
 
 For example:
+*   `releases/7.2.x` contains the code compatible with Duende IdentityServer `v7.2.4`.
 *   `releases/6.3.x` contains the code compatible with Duende IdentityServer `v6.3`.
 *   `releases/5.2.x` contains the code compatible with Duende IdentityServer `v5.2`.
 
