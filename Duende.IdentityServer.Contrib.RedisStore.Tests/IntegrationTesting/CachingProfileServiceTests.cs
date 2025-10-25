@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using IdentityModel.Client;
 using Duende.IdentityServer.Contrib.RedisStore.Tests.Cache;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Duende.IdentityModel.Client;
 using Xunit;
 
 namespace Duende.IdentityServer.Contrib.RedisStore.Tests
