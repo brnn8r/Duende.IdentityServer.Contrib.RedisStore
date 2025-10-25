@@ -24,6 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             builder.Services.AddScoped<RedisMultiplexer<RedisOperationalStoreOptions>>();
             builder.Services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
+            builder.Services.TryAddSingleton(TimeProvider.System); 
             return builder;
         }
 
@@ -41,6 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             builder.Services.AddScoped<RedisMultiplexer<RedisCacheOptions>>();
             builder.Services.AddTransient(typeof(ICache<>), typeof(RedisCache<>));
+            builder.Services.TryAddSingleton(TimeProvider.System);
             return builder;
         }
 
@@ -59,6 +61,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             builder.Services.TryAddTransient(typeof(TProfileService));
             builder.Services.AddTransient<IProfileService, CachingProfileService<TProfileService>>();
+            builder.Services.TryAddSingleton(TimeProvider.System);
             return builder;
         }
     }
