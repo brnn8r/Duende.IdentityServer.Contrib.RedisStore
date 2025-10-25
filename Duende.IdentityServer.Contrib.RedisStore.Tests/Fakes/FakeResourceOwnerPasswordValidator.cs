@@ -1,10 +1,8 @@
-﻿using IdentityModel;
-using Duende.IdentityServer.Validation;
-using System;
+﻿using Duende.IdentityServer.Validation;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
+using Duende.IdentityModel;
 
 namespace Duende.IdentityServer.Contrib.RedisStore.Tests.Cache
 {
