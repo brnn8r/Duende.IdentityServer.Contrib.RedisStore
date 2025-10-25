@@ -1,7 +1,6 @@
 ﻿using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Stores;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 using System;
@@ -23,9 +22,9 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Stores
 
         protected readonly ILogger<PersistedGrantStore> logger;
 
-        protected ISystemClock clock;
+        protected TimeProvider clock;
 
-        public PersistedGrantStore(RedisMultiplexer<RedisOperationalStoreOptions> multiplexer, ILogger<PersistedGrantStore> logger, ISystemClock clock)
+        public PersistedGrantStore(RedisMultiplexer<RedisOperationalStoreOptions> multiplexer, ILogger<PersistedGrantStore> logger, TimeProvider clock)
         {
             if (multiplexer is null)
                 throw new ArgumentNullException(nameof(multiplexer));
@@ -53,7 +52,7 @@ namespace Duende.IdentityServer.Contrib.RedisStore.Stores
             {
                 var data = ConvertToJson(grant);
                 var grantKey = GetKey(grant.Key);
-                var expiresIn = grant.Expiration - this.clock.UtcNow;
+                var expiresIn = grant.Expiration - clock.GetUtcNow();
                 if (!string.IsNullOrEmpty(grant.SubjectId))
                 {
                     var setKeyforType = GetSetKeyWithType(grant.SubjectId, grant.ClientId, grant.Type);
